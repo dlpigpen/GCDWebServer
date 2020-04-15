@@ -79,6 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GCDWebUploader : GCDWebServer
 
 /**
+ *  Sets which folders are allowed to be operated
+ *
+ *  The default value is nil i.e. all file extensions are allowed.
+ */
+@property(nonatomic, copy) NSArray<NSString*>* excludeFolders;
+
+/**
  *  Returns the upload directory as specified when the uploader was initialized.
  */
 @property(nonatomic, readonly) NSString* uploadDirectory;
@@ -195,6 +202,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  The default implementation returns YES.
  */
 - (BOOL)shouldCreateDirectoryAtPath:(NSString*)path;
+
 
 @end
 

@@ -203,6 +203,13 @@ NS_ASSUME_NONNULL_END
   return YES;
 }
 
+- (BOOL)_checkExcludeFolder:(NSString*)fileName {
+  if (_excludeFolders && ![_excludeFolders containsObject:[fileName lowercaseString]]) {
+    return NO;
+  }
+  return YES;
+}
+
 - (NSString*)_uniquePathForPath:(NSString*)path {
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     NSString* directory = [path stringByDeletingLastPathComponent];
@@ -255,6 +262,9 @@ NS_ASSUME_NONNULL_END
           @"size" : (NSNumber*)[attributes objectForKey:NSFileSize]
         }];
       } else if ([type isEqualToString:NSFileTypeDirectory]) {
+        
+        if ([self _checkExcludeFolder:item] == YES) { continue; }
+        
         [array addObject:@{
           @"path" : [[relativePath stringByAppendingPathComponent:item] stringByAppendingString:@"/"],
           @"name" : item
