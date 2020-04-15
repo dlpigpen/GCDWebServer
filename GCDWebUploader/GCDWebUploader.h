@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GCDWebUploader : GCDWebServer
 
 /**
- *  Sets which folders are allowed to be operated
+ *  Sets which folders are excluded  to be operated
  *
  *  The default value is nil i.e. all file extensions are allowed.
  */
